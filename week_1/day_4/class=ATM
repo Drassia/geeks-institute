@@ -1,0 +1,107 @@
+using System;
+using System.Collections.Generic;
+
+public class ATM
+{
+    private List<Account> _accounts;
+
+    public ATM(List<Account> accounts)
+    {
+        _accounts = accounts;
+    }
+
+    public Account Authenticate()
+    {
+        int attempts = 0;
+
+        while (attempts < 3)
+        {
+            Console.Write("Enter account number (or 0 to quit): ");
+            string accNumber = Console.ReadLine();
+
+            if (accNumber == "0")
+                return null;
+
+            Console.Write("Enter PIN: ");
+            if (!int.TryParse(Console.ReadLine(), out int pin))
+            {
+                Console.WriteLine("Invalid PIN.");
+                attempts++;
+                continue;
+            }
+
+            foreach (var acc in _accounts)
+            {
+                if (acc.AccountNumber == accNumber && acc.Pin == pin)
+                {
+                    Console.WriteLine("Login successful.");
+                    return acc;
+                }
+            }
+
+            Console.WriteLine("Incorrect account number or PIN.");
+            attempts++;
+        }
+
+        Console.WriteLine("Too many failed attempts. Exiting.");
+        return null;
+    }
+
+    public void ShowMenu(Account account)
+    {
+        bool exit = false;
+        while (!exit)
+        {
+            Console.WriteLine();
+            Console.WriteLine("1. Check balance");
+            Console.WriteLine("2. Deposit");
+            Console.WriteLine("3. Withdraw");
+            Console.WriteLine("4. View transactions");
+            Console.WriteLine("5. Exit");
+            Console.Write("Choose option: ");
+
+            string choice = Console.ReadLine();
+            PerformAction(account, choice);
+            if (choice == "5")
+                exit = true;
+        }
+    }
+
+    public void PerformAction(Account account, string choice)
+    {
+        switch (choice)
+        {
+            case "1":
+                account.CheckBalance();
+                break;
+
+            case "2":
+                Console.Write("Amount to deposit: ");
+                if (double.TryParse(Console.ReadLine(), out double dep) && dep > 0)
+                    account.Deposit(dep);
+                else
+                    Console.WriteLine("Invalid amount.");
+                break;
+
+            case "3":
+                Console.Write("Amount to withdraw: ");
+                if (double.TryParse(Console.ReadLine(), out double wd) && wd > 0)
+                    account.Withdraw(wd);
+                else
+                    Console.WriteLine("Invalid amount.");
+                break;
+
+            case "4":
+                account.ShowTransactions();
+                break;
+
+            case "5":
+                Console.WriteLine("Goodbye.");
+                break;
+
+            default:
+                Console.WriteLine("Invalid choice.");
+                break;
+        }
+    }
+}

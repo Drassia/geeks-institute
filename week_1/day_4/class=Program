@@ -1,0 +1,25 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        List<Account> accounts = new List<Account>
+        {
+            new Account { AccountNumber = "1111", Pin = 1234, Balance = 1000 },
+            new Account { AccountNumber = "2222", Pin = 5678, Balance = 500 }
+        };
+
+        ATM atm = new ATM(accounts);
+
+        while (true)
+        {
+            Account current = atm.Authenticate();
+            if (current == null)
+                return;
+
+            atm.ShowMenu(current);
+        }
+    }
+}
