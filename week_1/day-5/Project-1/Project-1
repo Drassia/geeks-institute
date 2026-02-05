@@ -1,0 +1,254 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
+
+namespace PersonalTaskManager
+{
+    public class TaskItem
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Status { get; set; } = "Pending"; // "Pending" or "Completed"
+        public DateTime? DueDate { get; set; }
+
+        public override string ToString()
+        {
+            string due = DueDate.HasValue ? DueDate.Value.ToShortDateString() : "No due date";
+            return $"Title: {Title}\nDescription: {Description}\nStatus: {Status}\nDue: {due}";
+        }
+    }
+
+    class Program
+    {
+        static List<TaskItem> tasks = new List<TaskItem>();
+        static string dataFile = "tasks.json";
+
+        static void Main()
+        {
+            LoadTasks();
+
+            bool exit = false;
+            while (!exit)
+            {
+                Console.Clear();
+                Console.WriteLine("=== Personal Task Manager ===");
+                Console.WriteLine("1. Add a Task");
+                Console.WriteLine("2. View Tasks");
+                Console.WriteLine("3. Update Task Status");
+                Console.WriteLine("4. Delete a Task");
+                Console.WriteLine("5. Exit");
+                Console.Write("Choose an option: ");
+
+                string choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        AddTask();
+                        break;
+                    case "2":
+                        ViewTasks();
+                        break;
+                    case "3":
+                        UpdateTaskStatus();
+                        break;
+                    case "4":
+                        DeleteTask();
+                        break;
+                    case "5":
+                        SaveTasks();
+                        exit = true;
+                        break;
+                    default:
+                        Console.WriteLine("Invalid option. Press any key to continue...");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        static void AddTask()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Add a Task ===");
+            Console.Write("Title: ");
+            string title = Console.ReadLine();
+
+            while (string.IsNullOrWhiteSpace(title))
+            {
+                Console.Write("Title cannot be empty. Enter title: ");
+                title = Console.ReadLine();
+            }
+
+            Console.Write("Description: ");
+            string description = Console.ReadLine();
+
+            Console.Write("Add due date? (y/n): ");
+            string addDue = Console.ReadLine()?.Trim().ToLower();
+            DateTime? dueDate = null;
+
+            if (addDue == "y")
+            {
+                Console.Write("Enter due date (yyyy-MM-dd): ");
+                if (DateTime.TryParse(Console.ReadLine(), out DateTime parsed))
+                    dueDate = parsed;
+                else
+                    Console.WriteLine("Invalid date. Skipping due date.");
+            }
+
+            TaskItem task = new TaskItem
+            {
+                Title = title,
+                Description = description,
+                DueDate = dueDate
+            };
+
+            tasks.Add(task);
+            Console.WriteLine("Task added successfully!");
+            Console.WriteLine("Press any key to return to menu...");
+            Console.ReadKey();
+        }
+
+        static void ViewTasks()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Your Tasks ===");
+
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine("No tasks found.");
+            }
+            else
+            {
+                for (int i = 0; i < tasks.Count; i++)
+                {
+                    Console.WriteLine($"\nTask #{i + 1}");
+                    Console.WriteLine("-----------------");
+                    Console.WriteLine(tasks[i]);
+                }
+            }
+
+            Console.WriteLine("\nPress any key to return to menu...");
+            Console.ReadKey();
+        }
+
+        static void UpdateTaskStatus()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Update Task Status ===");
+
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine("No tasks to update.");
+                Console.ReadKey();
+                return;
+            }
+
+            ViewTasksInternal();
+
+            Console.Write("\nEnter task number to update: ");
+            if (int.TryParse(Console.ReadLine(), out int index) &&
+                index >= 1 && index <= tasks.Count)
+            {
+                TaskItem task = tasks[index - 1];
+                Console.WriteLine($"\nCurrent status: {task.Status}");
+                Console.Write("Change status to (Pending/Completed): ");
+                string newStatus = Console.ReadLine();
+
+                if (newStatus == "Pending" || newStatus == "Completed")
+                {
+                    task.Status = newStatus;
+                    Console.WriteLine("Status updated!");
+                }
+                else
+                {
+                    Console.WriteLine("Invalid status. No changes made.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid task number.");
+            }
+
+            Console.WriteLine("Press any key to return to menu...");
+            Console.ReadKey();
+        }
+
+        static void DeleteTask()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Delete a Task ===");
+
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine("No tasks to delete.");
+                Console.ReadKey();
+                return;
+            }
+
+            ViewTasksInternal();
+            Console.Write("\nEnter task number to delete: ");
+
+            if (int.TryParse(Console.ReadLine(), out int index) &&
+                index >= 1 && index <= tasks.Count)
+            {
+                TaskItem task = tasks[index - 1];
+                Console.Write($"Are you sure you want to delete \"{task.Title}\"? (y/n): ");
+                string confirm = Console.ReadLine()?.Trim().ToLower();
+
+                if (confirm == "y")
+                {
+                    tasks.RemoveAt(index - 1);
+                    Console.WriteLine("Task deleted.");
+                }
+                else
+                {
+                    Console.WriteLine("Deletion cancelled.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid task number.");
+            }
+
+            Console.WriteLine("Press any key to return to menu...");
+            Console.ReadKey();
+        }
+
+        static void ViewTasksInternal()
+        {
+            for (int i = 0; i < tasks.Count; i++)
+            {
+                Console.WriteLine($"\nTask #{i + 1}");
+                Console.WriteLine("-----------------");
+                Console.WriteLine(tasks[i]);
+            }
+        }
+
+        static void LoadTasks()
+        {
+            if (File.Exists(dataFile))
+            {
+                try
+                {
+                    string json = File.ReadAllText(dataFile);
+                    var loaded = JsonSerializer.Deserialize<List<TaskItem>>(json);
+                    if (loaded != null)
+                        tasks = loaded;
+                }
+                catch
+                {
+                    // If file is corrupted, just start with empty list
+                    tasks = new List<TaskItem>();
+                }
+            }
+        }
+
+        static void SaveTasks()
+        {
+            string json = JsonSerializer.Serialize(tasks, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(dataFile, json);
+        }
+    }
+}

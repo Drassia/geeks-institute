@@ -1,0 +1,10 @@
+A mobile equestrian rhythm–simulation 3D game inspired by Morocco’s traditional Tbourida competitions.
+
+Core Gameplay Loop
+Line-Up Phase
+Charge Phase
+Shot Timing Phase (Key Moment)
+Evaluation Phase
+Gameplay Controls:
+You have forward/backward right/left to control the horse. (there will be a slight random movement influence on the horse movement to the left or right to incentivize the player to go left or right to neutralize this random movement, the player horizontal -left/right- movements will influence the sorba AI agent movements, so we can have an opportunity to see horse clash within the sorba thus having a penalties).
+Fire with one click or touch/tap on the screen, the firing should be accurate.
