@@ -1,0 +1,24 @@
+using System;
+
+namespace PersonalExpenseTracker
+{
+    public class Transaction
+    {
+        public int Id { get; set; }             
+        public string Title { get; set; }
+        public decimal Amount { get; set; }      
+        public string Category { get; set; }     
+        public DateTime Date { get; set; }
+
+        public Transaction() { }
+
+        public Transaction(int id, string title, decimal amount, string category, DateTime date)
+        {
+            Id = id;
+            Title = title;
+            Amount = amount;
+            Category = category;
+            Date = date;
+        }
+    }
+}

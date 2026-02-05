@@ -1,0 +1,345 @@
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Text.Json;   // For JSON save/load
+
+namespace PersonalExpenseTracker
+{
+    public class Transaction
+    {
+        public int Id { get; set; }              // Auto-incremented ID
+        public string Title { get; set; }
+        public decimal Amount { get; set; }      // Positive = income, negative = expense
+        public string Category { get; set; }
+        public DateTime Date { get; set; }
+    }
+
+    class Program
+    {
+        private static List<Transaction> _transactions = new List<Transaction>();
+        private static int _nextId = 1;
+        private const string DataFile = "transactions.json";
+
+        static void Main()
+        {
+            LoadTransactions();   // Load at app start [page:1]
+
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("=== Personal Expense Tracker ===");
+                Console.WriteLine("1. Add Transaction");
+                Console.WriteLine("2. View Transactions");
+                Console.WriteLine("3. Update Transaction");
+                Console.WriteLine("4. Delete Transaction");
+                Console.WriteLine("5. View Summary / Analysis");
+                Console.WriteLine("6. Save Transactions");
+                Console.WriteLine("0. Exit");
+                Console.Write("Choose an option: ");
+
+                var choice = Console.ReadLine();
+                switch (choice)
+                {
+                    case "1":
+                        AddTransaction();
+                        break;
+                    case "2":
+                        ViewTransactions();
+                        break;
+                    case "3":
+                        UpdateTransaction();
+                        break;
+                    case "4":
+                        DeleteTransaction();
+                        break;
+                    case "5":
+                        ViewSummary();
+                        break;
+                    case "6":
+                        SaveTransactions();
+                        break;
+                    case "0":
+                        SaveTransactions(); // optional auto-save on exit
+                        return;
+                    default:
+                        Console.WriteLine("Invalid choice. Press any key...");
+                        Console.ReadKey();
+                        break;
+                }
+            }
+        }
+
+        // 1. Add Transaction
+        private static void AddTransaction()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Add Transaction ===");
+
+            Console.Write("Title: ");
+            string title = Console.ReadLine();
+
+            decimal amount;
+            while (true)
+            {
+                Console.Write("Amount (positive = income, negative = expense): ");
+                if (decimal.TryParse(Console.ReadLine(), out amount))
+                    break;
+                Console.WriteLine("Invalid amount. Try again.");
+            }
+
+            Console.Write("Category: ");
+            string category = Console.ReadLine();
+
+            DateTime date;
+            while (true)
+            {
+                Console.Write("Date (yyyy-MM-dd): ");
+                if (DateTime.TryParseExact(Console.ReadLine(), "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                    break;
+                Console.WriteLine("Invalid date. Try again.");
+            }
+
+            var transaction = new Transaction
+            {
+                Id = _nextId++,
+                Title = title,
+                Amount = amount,
+                Category = category,
+                Date = date
+            };
+
+            _transactions.Add(transaction);
+            Console.WriteLine("Transaction added. Press any key...");
+            Console.ReadKey();
+        }
+
+        // 2. View Transactions (table-like output)
+        private static void ViewTransactions()
+        {
+            Console.Clear();
+            Console.WriteLine("=== All Transactions ===");
+
+            if (!_transactions.Any())
+            {
+                Console.WriteLine("No transactions found.");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.WriteLine("ID  | Date       | Title                 | Category       | Amount");
+            Console.WriteLine("----+------------+----------------------+----------------+-------------");
+
+            foreach (var t in _transactions.OrderBy(t => t.Date))
+            {
+                Console.WriteLine(
+                    $"{t.Id, -3} | {t.Date:yyyy-MM-dd} | {Truncate(t.Title, 20),-20} | {Truncate(t.Category, 14),-14} | {t.Amount,10:F2}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Press any key...");
+            Console.ReadKey();
+        }
+
+        // 3. Update Transaction
+        private static void UpdateTransaction()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Update Transaction ===");
+
+            if (!_transactions.Any())
+            {
+                Console.WriteLine("No transactions to update.");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write("Enter transaction ID: ");
+            if (!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.WriteLine("Invalid ID. Press any key...");
+                Console.ReadKey();
+                return;
+            }
+
+            var t = _transactions.FirstOrDefault(x => x.Id == id);
+            if (t == null)
+            {
+                Console.WriteLine("Transaction not found.");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.WriteLine($"Current title: {t.Title}");
+            Console.Write("New title (leave empty to keep): ");
+            string newTitle = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(newTitle))
+                t.Title = newTitle;
+
+            Console.WriteLine($"Current amount: {t.Amount}");
+            Console.Write("New amount (leave empty to keep): ");
+            string amountInput = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(amountInput) &&
+                decimal.TryParse(amountInput, out decimal newAmount))
+            {
+                t.Amount = newAmount;
+            }
+
+            Console.WriteLine($"Current category: {t.Category}");
+            Console.Write("New category (leave empty to keep): ");
+            string newCategory = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(newCategory))
+                t.Category = newCategory;
+
+            Console.WriteLine($"Current date: {t.Date:yyyy-MM-dd}");
+            Console.Write("New date (yyyy-MM-dd, leave empty to keep): ");
+            string dateInput = Console.ReadLine();
+            if (!string.IsNullOrWhiteSpace(dateInput) &&
+                DateTime.TryParseExact(dateInput, "yyyy-MM-dd",
+                    CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime newDate))
+            {
+                t.Date = newDate;
+            }
+
+            Console.WriteLine("Transaction updated. Press any key...");
+            Console.ReadKey();
+        }
+
+        // 4. Delete Transaction
+        private static void DeleteTransaction()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Delete Transaction ===");
+
+            if (!_transactions.Any())
+            {
+                Console.WriteLine("No transactions to delete.");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write("Enter transaction ID: ");
+            if (!int.TryParse(Console.ReadLine(), out int id))
+            {
+                Console.WriteLine("Invalid ID. Press any key...");
+                Console.ReadKey();
+                return;
+            }
+
+            var t = _transactions.FirstOrDefault(x => x.Id == id);
+            if (t == null)
+            {
+                Console.WriteLine("Transaction not found.");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+                return;
+            }
+
+            Console.Write($"Are you sure you want to delete '{t.Title}' (y/n)? ");
+            var confirm = Console.ReadLine();
+            if (confirm?.ToLower() == "y")
+            {
+                _transactions.Remove(t);
+                Console.WriteLine("Transaction deleted.");
+            }
+            else
+            {
+                Console.WriteLine("Deletion cancelled.");
+            }
+
+            Console.WriteLine("Press any key...");
+            Console.ReadKey();
+        }
+
+        // 5. Summary / Analysis
+        private static void ViewSummary()
+        {
+            Console.Clear();
+            Console.WriteLine("=== Summary / Analysis ===");
+
+            if (!_transactions.Any())
+            {
+                Console.WriteLine("No transactions to analyze.");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
+                return;
+            }
+
+            decimal totalIncome = _transactions.Where(t => t.Amount > 0).Sum(t => t.Amount);
+            decimal totalExpenses = _transactions.Where(t => t.Amount < 0).Sum(t => t.Amount);
+            decimal balance = totalIncome + totalExpenses; // expenses are negative
+
+            Console.WriteLine($"Total income:   {totalIncome:F2}");
+            Console.WriteLine($"Total expenses: {totalExpenses:F2}");
+            Console.WriteLine($"Balance:        {balance:F2}");
+            Console.WriteLine();
+
+            Console.WriteLine("Expenses per category:");
+            var expensesByCategory = _transactions
+                .Where(t => t.Amount < 0)
+                .GroupBy(t => t.Category)
+                .Select(g => new
+                {
+                    Category = g.Key,
+                    Total = g.Sum(t => t.Amount)
+                });
+
+            foreach (var item in expensesByCategory)
+            {
+                Console.WriteLine($"- {item.Category}: {item.Total:F2}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Recent transactions (by date desc):");
+            foreach (var t in _transactions.OrderByDescending(t => t.Date).Take(5))
+            {
+                Console.WriteLine($"{t.Date:yyyy-MM-dd} | {t.Title} | {t.Category} | {t.Amount:F2}");
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Press any key...");
+            Console.ReadKey();
+        }
+
+        // 6. Save / Load
+        private static void SaveTransactions()
+        {
+            // JSON save; you can switch to CSV if preferred. [page:1]
+            var json = JsonSerializer.Serialize(_transactions);
+            File.WriteAllText(DataFile, json);
+            Console.WriteLine("Transactions saved.");
+        }
+
+        private static void LoadTransactions()
+        {
+            if (!File.Exists(DataFile))
+                return;
+
+            var json = File.ReadAllText(DataFile);
+            try
+            {
+                _transactions = JsonSerializer.Deserialize<List<Transaction>>(json) 
+                                ?? new List<Transaction>();
+
+                if (_transactions.Any())
+                    _nextId = _transactions.Max(t => t.Id) + 1;
+            }
+            catch
+            {
+                _transactions = new List<Transaction>();
+            }
+        }
+
+        private static string Truncate(string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength - 3) + "...";
+        }
+    }
+}

@@ -19,12 +19,12 @@ namespace PersonalTaskManager
         }
     }
 
-    class Program
+    public class Program
     {
         static List<TaskItem> tasks = new List<TaskItem>();
         static string dataFile = "tasks.json";
 
-        static void Main()
+        public static void Main()
         {
             LoadTasks();
 
@@ -239,7 +239,7 @@ namespace PersonalTaskManager
                 }
                 catch
                 {
-                    // If file is corrupted, just start with empty list
+                    // If file is corrupted, start with empty list
                     tasks = new List<TaskItem>();
                 }
             }
@@ -247,7 +247,10 @@ namespace PersonalTaskManager
 
         static void SaveTasks()
         {
-            string json = JsonSerializer.Serialize(tasks, new JsonSerializerOptions { WriteIndented = true });
+            string json = JsonSerializer.Serialize(
+                tasks,
+                new JsonSerializerOptions { WriteIndented = true }
+            );
             File.WriteAllText(dataFile, json);
         }
     }
