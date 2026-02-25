@@ -1,0 +1,13 @@
+Pixel Runner: an endless-runner mobile game prototype developed in Unity in 1 week by a solo developer. The goal is to create a simple, replayable experience where the player dodges obstacles to achieve the highest possible score.
+​
+
+Used Unity with the built-in 2D tools and free asset packs for basic characters and obstacles. I started by prototyping the core movement and jump mechanics, then added obstacle spawning and a basic score system. I kept the visuals minimal, using simple shapes and flat colors to stay focused on gameplay. Finally, I implemented a basic UI with start, pause, and game-over screens.
+​
+
+Problems encountered: player jump felt unresponsive and either too floaty or too heavy. Obstacle spawning sometimes created impossible situations for the player. The UI layout did not scale well on devices with different aspect ratios.
+​
+
+To fix the jump, I tweaked gravity, jump force, and coyote time until the controls felt more responsive. I adjusted the obstacle spawn system by adding minimum spacing rules and a difficulty curve over time. For the UI, I switched to using Unity’s anchor system and tested layouts on multiple resolutions.
+​
+
+Key learning: focusing early on core feel (movement and responsiveness) and testing on real devices saves time later and leads to a more fun and polished prototype.

@@ -1,0 +1,70 @@
+Step 1 — Project Overview (≈180 words)
+“Crystal Heights” is a 2D platformer developed for PC and mobile, where the player climbs through four vertical levels of a ruined floating city, fighting corrupted guardians and collecting crystal shards to unlock new paths. The game targets casual to mid-core players aged 13–30 who enjoy short, challenging platforming sessions with light combat and clear progression. The project was developed over six weeks by a team of three: one gameplay programmer, one designer/level builder, and one artist handling UI and placeholder sprites. Our milestones were: week 1 for core movement prototype, weeks 2–3 for combat and collectibles, weeks 4–5 for building and polishing the four levels, and week 6 for balancing, bug fixing, and final builds. The goal was to create a compact but complete vertical slice demonstrating responsive platforming, readable combat, and a simple shard-based progression system that could scale into a larger game. The vision was to prioritize solid feel and readable feedback over detailed art so we could iterate quickly on mechanics and level flow.
+​
+
+Step 2 — Development Report (≈350 words)
+We built “Crystal Heights” in Unity using the 2D pipeline with simple sprite-based visuals and basic particle effects for hits and pickups. Version control was handled through Git, and Trello was used to track tasks and milestones. Our workflow followed a prototype → iterate → finalize loop: we first implemented core movement (running, jumping, coyote time, and variable jump height), then added melee attacks, enemy behavior, and shard collectibles before moving into level construction.
+​
+
+Early in development, we decided to constrain the game to four tightly scoped levels, each introducing one new mechanic (moving platforms, spike traps, ranged enemies, and timed doors). This decision came from an initial feature list that was too ambitious, which included skill trees and multiple weapon types. We cut these to keep the scope realistic within six weeks and to focus on polish for the core loop of “jump, fight, collect, unlock.”
+​
+
+Technically, we used Unity’s built-in 2D physics and simple state machines for both player and enemies. Enemies were designed with clear telegraphs and limited movement patterns to keep combat readable on small mobile screens. We implemented a single reusable enemy controller script with parameters for speed, attack range, and health, which reduced duplication and simplified balancing. For UI, we created a minimal HUD showing health, collected shards, and level progress, using anchors so it scaled correctly across resolutions.
+​
+
+Midway through development, we realized that building unique art for each level would slow us down, so we standardized on a small tileset with color variations per level. This allowed the artist to focus on key elements like enemies, hazards, and UI icons rather than full environment detail. In the final week, we ran quick playtests, used player feedback to adjust jump height, enemy damage, and checkpoint placement, and fixed critical bugs related to collision detection and enemy AI getting stuck on platforms.
+​
+
+Step 3 — Problems Encountered (≈230 words)
+One major technical issue was inconsistent collision behavior on moving platforms, where the player would occasionally slide off or get stuck on the edges. This happened because we initially relied solely on default physics without handling platform movement relative to the player, leading to unpredictable interactions and frustration in precision jumps.
+​
+
+A second technical problem was performance drops on lower-end mobile devices when multiple enemies and particle effects were active in the same area. Our initial setup spawned too many projectiles and used unoptimized particle systems, causing frame-rate dips during intense combat sequences.
+​
+
+On the design side, early versions of the second and third levels had uneven difficulty spikes, with some sections being significantly harder than others due to dense enemy placement and punishing checkpoint distances. This created a steep learning curve that didn’t match the target audience.
+​
+
+Another design challenge was making collectibles feel meaningful rather than just optional items scattered around the level. At first, shards were purely for score, and testers largely ignored harder-to-reach ones.
+​
+
+From a production standpoint, scope creep appeared in week 3 when we attempted to add a lightweight skill system and a boss encounter in the final level. This diverted time from polishing existing content and created stress near the end of the schedule. Communication around priorities was not always clear, which led to some tasks being started without full alignment on their importance or feasibility within the timeline.
+​
+
+Step 4 — Solutions & Adjustments (≈230 words)
+To address the moving platform collision issues, we implemented a dedicated platform controller that updates the player’s position relative to the platform when grounded, rather than relying solely on default physics. We also simplified collider shapes and added small tolerance margins on platform edges, which greatly reduced cases of sliding and getting stuck.
+​
+
+For performance problems on mobile, we limited the maximum number of active projectiles, reduced particle counts, and replaced some particle-based effects with simple sprite animations. We also profiled the scenes and removed unnecessary physics checks, which stabilized the frame rate during combat-heavy moments.
+​
+
+To smooth out difficulty spikes, we reviewed each level’s enemy placement and platform spacing, then redistributed enemies to create a more gradual ramp-up in challenge. Checkpoints were moved closer to difficult sections, ensuring players did not have to replay long easy areas after failing.
+​
+
+Collectibles were tied directly to progression by requiring a minimum number of shards to unlock late-level doors and by granting small permanent health increases at specific thresholds. This change encouraged players to engage with exploration and riskier platforming routes.
+​
+
+To combat scope creep and production issues, we held a mid-project review where we explicitly cut the skill system and boss fight from the current milestone and documented them as future features. We introduced a simple weekly planning session to prioritize tasks and made sure each team member had a clear, achievable list aligned with the project goals and deadline.
+​
+
+Step 5 — Post-Mortem Analysis (≈270 words)
+Successes
+Core movement and jumping felt responsive and satisfying to most testers, which validated our early focus on tuning gravity, acceleration, and coyote time. The shard-based progression system successfully encouraged exploration without overwhelming players, and the simple enemy AI with clear telegraphs fit well with our limited art resources. Unity’s 2D tools, along with a small shared tileset, enabled quick level iteration, and our reusable scripts for enemies and hazards reduced bugs and improved consistency. Team communication improved significantly after we introduced weekly planning sessions, helping us stay aligned in the final weeks.
+​
+
+Failures
+We initially underestimated the time required to balance difficulty across levels, resulting in late-stage reworks of layouts and enemy placements. Our early attempt to add a skill system and a boss fight stretched the team and delayed polishing already implemented content. We also started level art and set dressing too early, leading to some rework when layouts changed after playtesting. Finally, we did not test on lower-end mobile devices early enough, so performance issues surfaced late in development.
+​
+
+Root Causes
+Many of the negative outcomes stemmed from unclear initial scope and insufficient upfront prioritization. We treated certain “nice-to-have” features as must-have too early, which conflicted with our limited time and small team size. The lack of early performance profiling and broad device testing reflected an over-focus on desktop builds during development. Starting art polish before finalizing level layouts came from a desire to make the game look more complete for internal reviews, but it ignored the iterative nature of level design. Overall, the root cause was not aligning decisions tightly enough with the project’s core goal: delivering a polished, small vertical slice rather than a feature-complete game.
+​
+
+Step 6 — Key Learnings (≈180 words)
+Technically, we learned that building reusable, parameterized systems (for enemies, hazards, and collectibles) reduces bugs and speeds up balancing, especially in small teams. Early performance profiling on target devices is essential, even for “simple” 2D games, because effects and physics can quickly impact frame rate on mobile.
+​
+
+From a design perspective, we confirmed that level flow and difficulty ramping require iterative testing and adjustment, not just planning on paper. Tying collectibles directly to progression or meaningful upgrades makes players care about them more than pure score does. We also saw that focusing on one clear mechanic per level helps players learn without feeling overwhelmed.
+​
+
+On the production side, strict scope control is critical: defining a minimal, non-negotiable core experience and cutting everything that does not support it protects the schedule and quality. Regular, short planning meetings keep priorities aligned and reduce wasted work. For future projects, we will delay visual polish until layouts and mechanics are stable and will schedule dedicated time for external playtests before the final week. This will help us make better decisions earlier and deliver a more coherent experience within our constraints.
