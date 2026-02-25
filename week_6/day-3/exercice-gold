@@ -1,0 +1,199 @@
+Exercise 1 – Advanced Communication & Role Strategy
+
+1. Team map, roles, and dependencies (example)
+Role	        : Example responsibilities	Dependencies
+Producer/ PM	: Planning, scope, priorities, risk, communication cadence	Needs input from all disciplines
+Lead Designer	: Vision, core mechanics, feature priorities	Depends on tech feasibility, art capacity
+Gameplay Developer  : Implement mechanics, fix bugs, profiling	Needs clear specs from design, assets from art
+Tools / Tech Developer	: Engine/tools maintenance, build pipeline, performance	Depends on producer for priorities
+Lead Artist	      : Art direction, key assets, pipeline	Needs design references, tech constraints
+UI/UX Designer	  : Menus, HUD, flows, usability tests	Needs gameplay loops, implementation support
+QA Lead / Tester  : Test plans, regression tests, bug reports	Needs builds from devs, decisions from leads
+Mention overlapping roles (e.g., a developer also acting as build engineer, a designer also doing basic UI) and note risks such as overloading or decision bottlenecks.
+​
+
+2. Bottlenecks and breakdowns (examples)
+All decisions waiting on one lead (producer or lead designer), causing delays.
+
+Specs changing in chat only, so developers miss decisions.
+
+Art and dev working on different versions of features due to outdated documentation.
+​
+
+3. Multi-layered communication system
+Daily updates:
+
+15-minute daily standup (synchronous): yesterday, today, blockers.
+
+Asynchronous daily written update in a “#daily” channel for absent members.
+
+Weekly alignment:
+
+60–90 min weekly sprint meeting: review build, adjust priorities, confirm scope.
+
+Separate short leads sync (producer + discipline leads) to align before team meeting.
+
+Documentation and decision logging:
+
+One source of truth (Notion/Confluence/Google Docs).
+
+Each major decision logged with: date, owner, rationale, impact.
+​
+
+4. Risk mitigation plan for communication failures
+Define escalation paths: if blocked >24 hours, escalate to producer, then to leadership.
+
+Redundancy: at least two people understand each critical system or feature.
+
+“Decision freeze” windows around milestones to avoid last-minute, undocumented changes.
+
+Retrospectives after each milestone to review communication failures and define 1–2 concrete improvements.
+
+
+Exercise 2 – Expert Feedback System & Iterative Improvement
+1. Tiered feedback framework
+Peer-to-peer:
+
+Informal but structured: use Observation → Impact → Suggestion.
+
+Done during feature handoffs and code/art reviews.
+
+Lead-to-team:
+
+Regular review sessions (e.g., weekly build review).
+
+Focus on alignment with vision, quality bar, and priorities.
+
+Cross-discipline review:
+
+Dedicated playtest where designers, devs, artists, and QA watch and comment.
+
+Emphasis on trade-offs (performance vs visuals vs UX).
+​
+
+2. Concrete feedback examples
+Gameplay mechanic example:
+
+Observation: “In the boss fight, the boss’s attack pattern repeats with no variation after 30 seconds.”
+
+Impact: “Players quickly learn the pattern and the fight becomes repetitive instead of tense.”
+
+Suggestion: “Introduce a second phase at 50% health with new attacks and a telegraphed pattern shift.”
+
+Technical implementation example:
+
+Observation: “Loading times spike from 2s to 8s when entering Level 3.”
+
+Impact: “This breaks pacing and risks crashes on lower-spec machines.”
+
+Suggestion: “Profile asset loading, stream large textures, and add a lightweight loading screen with tips.”
+​
+
+3. Tracking system for feedback
+Use a board (Jira/Trello/ClickUp):
+
+Columns: Backlog → To Review → In Progress → In Build → Verified.
+
+Each feedback item is a ticket with type (gameplay, tech, art), owner, priority, due date.
+
+Link feedback tickets to builds:
+
+Note build number where the change is integrated.
+
+QA verifies and closes items only after test in that build.
+​
+
+4. Turning negative reactions into productive outcomes
+Normalize emotional response: acknowledge frustration first, then shift to problem-solving.
+
+Use facilitation phrases: “What problem are we trying to solve?”, “What constraints are we working with?”
+
+Reframe blame into hypotheses: “What might be causing this issue?” instead of “Who messed this up?”
+
+Add a rule: no feedback during crunch without a proposed next step (even if it’s “park and revisit after deadline”).
+
+
+Exercise 3 – Stress Management, Conflict Resolution & Leadership
+1. Four major stress factors and strategies
+Technical stress (e.g., engine bugs, crashes):
+
+Strategy 1: Time-box technical spikes, then decide to fix, work around, or cut.
+
+Strategy 2: Maintain a risk register with top tech risks and mitigation owners.
+
+Strategy 3: Pair programming or problem-solving sessions for critical issues.
+​
+
+Deadline stress:
+
+Strategy 1: Aggressive scope control; define “must-have / nice-to-have / cut” lists.
+
+Strategy 2: Milestone slicing – frequent small milestones rather than one big delivery.
+
+Strategy 3: Transparent progress dashboards so surprises are minimized.
+​
+
+Interpersonal stress:
+
+Strategy 1: Regular 1:1s between leads and team members to surface tension early.
+
+Strategy 2: Shared team agreements on communication tone, feedback rules, and meeting etiquette.
+
+Strategy 3: Rotate “meeting facilitator” to ensure everyone is heard.
+​
+
+Personal stress (individual capacity, life events):
+
+Strategy 1: Encourage people to flag overload early; adjust tasks accordingly.
+
+Strategy 2: Respect no-meeting or focus blocks, especially near deadlines.
+
+Strategy 3: Provide flexibility (remote work hours, short breaks) where possible.
+​
+
+2. Critical conflict scenario and resolution
+Example scenario: Lead designer insists on keeping a complex feature, while lead developer argues it will jeopardize stability and deadline.
+
+Conflict type:
+
+Task and process conflict, with a risk of becoming personal if unmanaged.
+
+Step-by-step resolution:
+
+Frame the shared goal (shippable, high-impact prototype by date X).
+
+Each lead states their view, constraints, and risks without interruption.
+
+List options: full feature, reduced version, delayed version, or cut.
+
+Evaluate options against impact vs cost vs risk; use simple scoring if needed.
+
+Decide as a small group (producer + both leads) and document the decision.
+
+Communicate rationale to the team and schedule a follow-up review after the milestone.
+​
+
+3. Leadership approach and prevention
+Leadership style:
+
+Calm, data-informed, and transparent, highlight trade-offs instead of imposing decisions without context.
+
+Protect the team from scope creep and unrealistic demands.
+
+Preventive measures:
+
+Clear decision-making authority (“who decides what”).
+
+Early risk discussions whenever scope changes are proposed.
+
+Regular retrospectives focusing on “what to change next time” rather than blame.
+​
+
+4. Sustaining collaboration during crunch with minimal burnout
+Limit consecutive crunch days; set maximum overtime and enforce recovery days.
+
+Focus sprints: during crunch, each person has a narrow set of tasks, fewer meetings, and high support.
+
+Celebrate small wins (build milestones, resolved bugs) and publicly recognize collaborative behavior.
+
+After crunch, run a structured debrief to capture lessons and adjust processes so crunch is rarer and more controlled.
