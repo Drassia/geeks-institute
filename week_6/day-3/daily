@@ -1,0 +1,54 @@
+1️⃣ Communication Audit
+Designer submitted a feature without informing developers
+
+Why it’s a problem: Developers were unaware of the change, which caused a bug and disrupted the sprint plan.
+​
+
+Immediate improvement: Require that any new feature or change goes through a short announcement in a shared channel and is added as a task in the sprint board before implementation.
+​
+
+No clear process for announcing changes
+
+Why it’s a problem: The team relies on informal communication, so important changes slip through and impact stability and deadlines.
+​
+
+Immediate improvement: Define a simple “change policy”: any new feature must be documented (one paragraph + impact) and reviewed quickly by at least one developer before being merged.
+​
+
+Team members avoid giving feedback
+
+Why it’s a problem: Issues stay hidden, frustration grows, and bugs or workflow problems repeat because they are never openly discussed.
+​
+
+Immediate improvement: Schedule a short, regular feedback slot (e.g., 15 minutes at end of sprint day) using a structured format, and set a rule that feedback focuses on work, not people.
+​
+
+2️⃣ Feedback Exercise (Observation → Impact → Suggestion)
+Constructive feedback to the designer:
+
+Observation: “In today’s sprint, the new feature was added directly to the build without a prior message or task on the board, and it introduced a bug during testing.”
+
+Impact: “This created unexpected work for the developers, increased stress close to the deadline, and slowed the team down because we had to stop and fix it.”
+
+Suggestion: “For future features, could you first create a ticket, share a short note in the dev channel, and wait for a quick confirmation before integrating it into the main build?”
+
+This keeps the tone professional, targets the behavior, and proposes a clear next step.
+​
+
+3️⃣ Stress & Collaboration Solution
+Main stress factor for the developer
+
+The main stress factor is overlapping tasks and tight deadlines, made worse by unexpected changes like unannounced features.
+​
+
+Two practical strategies to reduce stress and maintain collaboration
+
+Strategy 1: Clarify priorities and workload at the start of each day (or sprint), so the developer has a realistic task list and can push back on extra work that doesn’t fit.
+
+Strategy 2: Introduce a “no surprise changes” rule near deadlines, where new features must be scheduled for the next sprint unless the whole team agrees and adjusts scope.
+
+One action for the team leader to prevent similar issues
+
+The team leader can establish and enforce a simple workflow: all new features must be logged on the board, briefly discussed in daily standup, and approved before implementation, with a reminder that this process protects both quality and the team’s stress levels.
+​
+
