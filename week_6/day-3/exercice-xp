@@ -1,0 +1,138 @@
+Exercise 1 – Communication & Role Clarity
+Roles and responsibilities (example table)
+
+Role	    : Main responsibilities
+Producer	: Define milestones, prioritize tasks, track progress, remove     blockers, coordinate team
+Designer	: Define core mechanics, write design docs, tune game balance, prepare prototype specs
+Developer	: Implement features, fix bugs, integrate assets, maintain build stability
+Artist	    : Create UI, characters, environments, and VFX; prepare assets for integration
+
+QA / Tester	Test builds, report bugs clearly, verify fixes, track regressions
+Communication channels
+Chat: Quick questions, daily coordination, sharing small updates.
+
+Weekly meeting (video or in-person): Review progress, adjust priorities, resolve blockers.
+
+Email: Formal decisions, recap of key decisions and milestones.
+
+Documentation (Notion / Google Docs): Design docs, task board, meeting notes.
+
+Communication plan (example)
+Daily:
+
+10–15 min standup on chat or call: what was done yesterday, today’s plan, blockers.
+
+Producer posts a brief end-of-day summary in chat.
+
+Weekly:
+
+1 planning/review meeting to:
+
+Review last week’s progress.
+
+Decide priorities for next sprint.
+
+Clarify responsibilities for new tasks.
+
+Framework: Observation → Impact → Suggestion
+Example definition:
+
+Observation: What you saw/heard in the prototype, concrete and neutral.
+
+Impact: How it affects player experience, production, or goals.
+
+Suggestion: A clear, actionable idea to improve it.
+
+Example of constructive feedback
+Observation: “In the second level, enemies spawn directly behind the player without warning.”
+
+Impact: “This feels unfair and makes players lose health in ways they can’t anticipate, which may cause frustration.”
+
+Suggestion: “Add a short audio cue or spawn indicator behind the player 1–2 seconds before enemies appear.”
+
+How feedback is received and applied
+After each playtest, the team meets for 30 minutes.
+
+Everyone notes feedback in a shared doc using the Observation → Impact → Suggestion format.
+
+Producer and designer:
+
+Group feedback by theme (controls, UX, difficulty).
+
+Prioritize items into “do now”, “do later”, “parked”.
+
+Developer and artist:
+
+Turn prioritized feedback into tasks on the board (e.g., Trello/Jira).
+
+Mark each item as implemented and link to the build where it was fixed.
+
+Preventing feedback from becoming personal
+Focus on the work, not the person (“This mechanic feels confusing” vs. “You did this wrong”).
+
+Use “I” statements: “I found it hard to understand where to go” instead of “Players will be lost.”
+
+Set rules for feedback sessions:
+
+No interruptions, active listening.
+
+Assume positive intent.
+
+Time-box discussions; if it becomes heated, park it and revisit calmly.
+
+Encourage team members to ask clarifying questions before defending their choices.
+
+
+
+Three main sources of stress (example) and solutions
+Tight deadline for playable prototype
+
+Solution 1: Break work into smaller milestones with mini-deadlines and visible progress.
+
+Solution 2: Reduce scope (cut non-essential features) while protecting the core experience.
+
+Unclear priorities and task ownership
+
+Solution 1: Producer maintains a visible task board with owners and due dates.
+
+Solution 2: Weekly re-prioritization meeting to clarify what is “must have” vs “nice to have.”
+
+Communication overload or silence
+
+Solution 1: Agree on when to use which channel (chat vs meeting vs doc).
+
+Solution 2: Schedule a short weekly “health check” where everyone can share concerns safely.
+
+Conflict scenario (example)
+Scenario: Designer wants to add a complex new feature to improve innovation, but developer worries it will risk the deadline.
+
+Conflict type
+Mainly task-based and process-based (what to build now and how to plan it).
+
+Steps to resolve it
+Clarify the shared goal: deliver a stable, fun prototype by the deadline.
+
+Each side explains their perspective in turn (no interruptions).
+
+List constraints: time, skills, tech limitations, testing needs.
+
+Explore options:
+
+Implement a simplified version of the feature.
+
+Move full version to “post-prototype” phase.
+
+Create a small spike/proof-of-concept time-boxed to 1 day.
+
+Decide together which option best supports the goal and document the decision.
+
+Review after a week: did the decision help both quality and schedule?
+
+Leadership behavior
+Stay neutral and calm, let both sides speak.
+
+Reframe discussion around the team’s goals, not individual preferences.
+
+Protect people from burnout (no constant overtime, encourage breaks).
+
+Recognize good collaboration publicly, not just delivered features.
