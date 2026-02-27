@@ -1,0 +1,34 @@
+In a school system, good student performance often leads to praise and recognition, which motivates students to keep studying hard, creating a reinforcing feedback loop. When many students start struggling, teachers may slow down, review material, or add support sessions, forming a balancing feedback loop that tries to bring performance back up. If too many rules or punishments are added, students may disengage, which can further increase discipline problems, reinforcing a negative loop that the school must notice and correct.
+
+
+Here’s a game-focused feedback loop example you can use.
+​In a competitive online game, winning matches gives players ranking points and rewards, which encourages them to keep playing and improving, creating a reinforcing feedback loop. When a player loses too many matches in a row, the matchmaking system may place them against weaker opponents, forming a balancing loop that helps keep the experience fair and fun. If rewards for winning are too strong, high-ranked players may snowball in power, making it harder for others to catch up and creating a reinforcing loop that designers must tune to avoid frustration.
+
+
+In League of Legends, players sometimes stack movement speed and dashes to cross walls or reach areas the designers never intended. This happened because several separate systems (items, champion abilities, terrain collision, and buffs) interacted in an edge case the balance team did not fully anticipate. The game followed its rules correctly, but their combination produced an emergent exploit that players discovered through experimentation.
+
+
+In League of Legends, the basic last-hitting gold system is simple: kill a minion, get a fixed amount of gold.
+​In Minecraft, the redstone circuitry system is complicated: many parts (repeaters, comparators, pistons) interact in predictable but intricate ways to build machines.
+In EVE Online, the player-driven economy is complex: prices, wars, alliances, and player behavior interact in unpredictable ways, leading to emergent market dynamics.
+
+
+In an RPG mana system, the stock is the current mana bar the player has available to cast spells. The sources are actions or effects that restore mana, such as potions, passive regeneration, or abilities that convert health into mana. The sinks are spell casts and abilities that consume mana, draining the stock until the player replenishes it again.
+​
+
+Iron ore → iron ingot.
+​Wheat → bread.
+​Leather → armor.
+​Sand → glass.
+
+
+In many RPGs, the XP and leveling loop is a reinforcing loop. As the player gains XP, they level up and become stronger, which makes it easier to defeat tougher enemies and earn even more XP, further accelerating their progression. If there is no strong counter-system (like scaling enemies), this loop keeps amplifying the player’s power over time.
+
+
+Introduce an enemy scaling system where, as the player’s level or gear score increases, enemies gain more health, damage, or new abilities. This creates a balancing loop because rapid player power growth automatically triggers tougher challenges, slowing down how “overpowered” they feel.
+
+
+In League of Legends, the combat system and the economy system are tightly linked. Winning fights and securing objectives (like towers and dragons) grants gold, which lets players buy stronger items in the shop. Those items then make the player more powerful in combat, increasing their chances of winning future fights and earning even more gold.
+​
+
+In Minecraft, players created flying machines using slime blocks, pistons, and observers to move through the world without walking. This surprising behavior emerged from the interaction between the redstone update system, block push mechanics, and how slime blocks stick and move adjacent blocks together. The systems all followed their individual rules, but their combination produced a mobile vehicle the designers hadn’t originally intended.
