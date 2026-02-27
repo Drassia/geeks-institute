@@ -1,0 +1,48 @@
+Player → explores → mysterious dungeon to find the legendary artifact.
+​Goal: Find and escape with the legendary artifact hidden in the dungeon.
+​Rule 1: The player can only see a small area around them; the rest of the map is hidden by fog.
+​Rule 2: The player has limited health and no automatic regeneration; healing items are scarce.
+​Feedback: A heartbeat sound and red screen vignette intensify as health gets low, signaling danger.
+​Change Rule 2 to: “Health slowly regenerates over time when the player is not in combat.” The experience becomes less tense and more forgiving, encouraging slower, safer exploration instead of constant high-pressure decisions.
+
+
+Pillars: Tense, Curious, Rewarding.
+​Non-goal: No unfair or random deaths that the player could not anticipate or learn from.
+
+
+Limited-vision fog of war: Creates a tense feeling of uncertainty and caution while exploring.
+​Scarce healing items: Creates pressure, making every hit feel meaningful and every resource choice important.
+​Hidden rooms with rare loot: Creates a rewarding sense of curiosity and discovery for players who explore thoroughly.
+If we remove the scarce healing items mechanic, the experience becomes less stressful and more relaxed; players can recover more easily from mistakes, so exploration feels safer but also less intense.
+
+
+Do explore dungeon rooms → Get clues and keys → Unlock deeper, more dangerous areas → Repeat.
+​Teach: Introduce a simple locked door that opens with a clearly marked key in the same room.
+​Test: Place multiple doors and keys in a small area so the player must choose the correct order to progress.
+​Twist: Add fake keys and traps, forcing the player to carefully read clues and remember patterns.
+​Master: Combine branching paths, timed doors, and multi-step keys so the player must plan a full route using everything they’ve learned.
+​
+
+Goal: Reach the heart of the dungeon and escape alive with the legendary artifact.
+​Rule 1: The player loses all collected loot if they die before reaching a safe checkpoint.
+​Rule 2: The player can only carry a limited number of healing items at once.
+Feedback (success): When the player clears a room or reaches a checkpoint, they get a triumphant sound, bright visual flare, and a clear “Safe” icon on screen.
+​Feedback (failure): On death, the screen desaturates, the sound muffles into a low rumble, and a summary shows lost loot and progress.
+​Cosmetic reward: Unlock progressively more elaborate glowing cloak skins for the character at milestones like clearing 3, 10, and 25 dungeon runs without dying.
+
+
+I’ll add an aim assist / generous hitbox tool that slightly widens the window for successful attacks and interactions, so beginners feel their inputs “work” more often and are less punished by minor aiming errors.
+​Knob 1 – Aim assist strength: Increasing it should help new players land more hits and feel competent, but I’ll watch that it doesn’t make the game feel too automatic.
+​Knob 2 – Enemy damage: Slightly lowering early-game enemy damage should reduce frustration from small mistakes while still keeping tension, especially before players fully learn the mechanics.
+
+
+​Room 1 – Teach: A short corridor with one basic enemy and a single locked door that opens with a nearby key, teaching combat and “find key → open door.” Checkpoint after the door so players don’t have to redo the intro if they die in Room 2 (saves time, reduces boredom).
+​Room 2 – Test: A larger room with multiple enemies and two locked doors, each needing a different key hidden in side alcoves, testing navigation and prioritization. Checkpoint after clearing the room so players keep progress on keys and enemies (reduces frustration from repeating a long fight).
+​Room 3 – Twist: A vertical room with moving platforms, fake keys, and traps; stepping on the wrong platform drops you into a small enemy pit, twisting the key-door idea into a light puzzle. No checkpoint here to keep tension, but falling only sends you to the start of Room 3, not all the way back (challenge without hard reset).
+​Room 4 – Master: A branching chamber with a timed central gate that requires activating three switches in different sub-rooms, combining combat, navigation, and trap awareness under time pressure. Final checkpoint at the entrance to Room 4 so failed timed runs can be retried quickly without replaying earlier rooms (saves time, focuses on mastering the mechanic).
+
+
+​I’ll add subtitle and UI text size options in the Settings → Accessibility menu, so players can increase font size and readability before or during play.
+​I’ll add a high-contrast interaction outline that appears around doors, levers, and enemies, toggled in Accessibility settings and visible during normal gameplay.
+​Helpful in-game prompt text:
+“Tip: You can change text size and enable high-contrast highlights anytime in Settings → Accessibility to make reading and spotting interactable objects easier.”
