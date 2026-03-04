@@ -1,0 +1,33 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main()
+    {
+        Console.Write("Enter a word: ");
+        string word = Console.ReadLine();
+
+        Dictionary<char, List<int>> letterPositions = new Dictionary<char, List<int>>();
+
+        for (int i = 0; i < word.Length; i++)
+        {
+            char c = word[i];
+
+            if (!letterPositions.ContainsKey(c))
+            {
+                letterPositions[c] = new List<int>();
+            }
+
+            letterPositions[c].Add(i);
+        }
+
+        Console.WriteLine("Letter positions:");
+        foreach (var kvp in letterPositions)
+        {
+            Console.Write($"{kvp.Key}: [");
+            Console.Write(string.Join(", ", kvp.Value));
+            Console.WriteLine("]");
+        }
+    }
+}
