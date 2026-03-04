@@ -31,3 +31,28 @@ class Program
         }
     }
 }
+
+int height = 5;
+
+for (int i = 1; i <= height; i++)
+{
+    string line = "";
+    for (int j = 1; j <= i; j++)
+    {
+        line += "*";
+    }
+    Console.WriteLine(line);
+}
+
+
+Console.Write("Enter a word: ");
+string word = Console.ReadLine();
+
+string reversed = "";
+
+for (int i = word.Length - 1; i >= 0; i--)
+{
+    reversed += word[i];
+}
+
+Console.WriteLine(reversed);
